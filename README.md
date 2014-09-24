@@ -1,9 +1,9 @@
-SpreeTravelSample
+Wbsbooks Sample
 =================
 
-Load travel data sample 
+Load books data sample 
 
-$ bundle
-$ bundle exec rake spree_travel_sample:load    
+$ bundle install
+$ bundle exec rake wbsbooks_sample:load    
 
-Copyright (c) 2013 OpenJAF, released under the New BSD License
+Copyright (c) 2014 Wbsbooks.com

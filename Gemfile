@@ -24,13 +24,5 @@ end
 source GEMS_PATH
 
 #SPREE_GEMS
-gem 'spree', '2.1.1'
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-1-stable'
-gem 'spree_related_products', github: 'spree/spree_related_products', branch: '2-1-stable'
-
-# SPREE_GEMS (BY OPENJAF)
-gem 'spree_property_type',        PROTOCOL => "#{SPREE_TRAVEL_PATH}/spree_property_type"
-
-#SPREE_TRAVEL_GEMS
-gem 'spree_travel_core',           PROTOCOL => "#{SPREE_TRAVEL_PATH}/spree_travel_core"
-
+gem 'spree', '2.3.1'
+gem 'wbsbooks_sample', github: 'wbslogistic/wbsbooks_sample', branch: 'master'

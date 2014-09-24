@@ -1,41 +1,27 @@
-begin
-north_america = Spree::Zone.find_by_name!("North America")
-rescue ActiveRecord::RecordNotFound
-  puts "Couldn't find 'North America' zone. Did you run `rake db:seed` first?"
-  puts "That task will set up the countries, states and zones required for Spree."
-  exit
-end
-
 europe_vat = Spree::Zone.find_by_name!("EU_VAT")
 shipping_category = Spree::ShippingCategory.find_or_create_by!(name: 'Default')
 
 Spree::ShippingMethod.create!([
   {
-    :name => "UPS Ground (USD)",
-    :zones => [north_america],
-    :calculator => Spree::Calculator::Shipping::FlatRate.create!,
-    :shipping_categories => [shipping_category]
-  },
-  {
-    :name => "UPS Two Day (USD)",
-    :zones => [north_america],
-    :calculator => Spree::Calculator::Shipping::FlatRate.create!,
-    :shipping_categories => [shipping_category]
-  },
-  {
-    :name => "UPS One Day (USD)",
-    :zones => [north_america],
-    :calculator => Spree::Calculator::Shipping::FlatRate.create!,
-    :shipping_categories => [shipping_category]
-  },
-  {
-    :name => "UPS Ground (EU)",
+    :name => "Via UK (Arrival Wickford) (3 kgs)",
     :zones => [europe_vat],
     :calculator => Spree::Calculator::Shipping::FlatRate.create!,
     :shipping_categories => [shipping_category]
   },
   {
-    :name => "UPS Ground (EUR)",
+    :name => "Courier Rate (3 kgs to RU)",
+    :zones => [europe_vat],
+    :calculator => Spree::Calculator::Shipping::FlatRate.create!,
+    :shipping_categories => [shipping_category]
+  },
+  {
+    :name => "Direct Rate (3 kgs) Road/Sea",
+    :zones => [europe_vat],
+    :calculator => Spree::Calculator::Shipping::FlatRate.create!,
+    :shipping_categories => [shipping_category]
+  },
+  {
+    :name => "Direct Rate (3 kgs) Air",
     :zones => [europe_vat],
     :calculator => Spree::Calculator::Shipping::FlatRate.create!,
     :shipping_categories => [shipping_category]
@@ -43,11 +29,10 @@ Spree::ShippingMethod.create!([
 ])
 
 {
-  "UPS Ground (USD)" => [5, "USD"],
-  "UPS Ground (EU)" => [5, "USD"],
-  "UPS One Day (USD)" => [15, "USD"],
-  "UPS Two Day (USD)" => [10, "USD"],
-  "UPS Ground (EUR)" => [8, "EUR"]
+  "Via UK (Arrival Wickford) (3 kgs)" => [13, "USD"],
+  "Courier Rate (3 kgs to RU)" => [5, "USD"],
+  "Direct Rate (3 kgs) Road/Sea" => [3, "USD"],
+  "Direct Rate (3 kgs) Air" => [3, "USD"]
 }.each do |shipping_method_name, (price, currency)|
   shipping_method = Spree::ShippingMethod.find_by_name!(shipping_method_name)
   shipping_method.calculator.preferred_amount = price
